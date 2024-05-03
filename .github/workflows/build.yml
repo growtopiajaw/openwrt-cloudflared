@@ -27,7 +27,7 @@ jobs:
           NO_DEFAULT_FEEDS: 1
           EXTRA_FEEDS: >-
             src-git-full|base|https://github.com/openwrt/openwrt.git
-            src-git|packages|https://github.com/openwrt/packages.git^${{ steps.op_version.outputs.sha }}
+            src-git|packages|https://github.com/growtopiajaw/packages.git^${{ steps.op_version.outputs.sha }}
           PACKAGES: cloudflared
 
       - name: Upload Output Folder
