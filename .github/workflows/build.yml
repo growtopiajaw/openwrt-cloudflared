@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: openwrt/openwrt
+          repository: growtopiajaw/openwrt
 
       - name: Set targets
         id: find_targets
