@@ -21,7 +21,7 @@ jobs:
       - name: Build Package
         uses: openwrt/gh-action-sdk@main
         env:
-          ARCH: mips_24kc-main
+          ARCH: mips_24kc
           V: s
           IGNORE_ERRORS: n m y
           NO_DEFAULT_FEEDS: 1
