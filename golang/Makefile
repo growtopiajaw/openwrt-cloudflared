@@ -79,6 +79,8 @@ BOOTSTRAP_SOURCE_URL:=$(GO_SOURCE_URLS)
 BOOTSTRAP_HASH:=f4ff5b5eb3a3cae1c993723f3eab519c5bae18866b5e5f96fe1102f0cb5c3e52
 
 BOOTSTRAP_BUILD_DIR:=$(HOST_BUILD_DIR)/.go_bootstrap
+BOOTSTRAP_WORK_DIR:=$(BOOTSTRAP_BUILD_DIR)/.go_work
+BOOTSTRAP_CACHE_DIR:=$(BOOTSTRAP_WORK_DIR)/cache
 
 BOOTSTRAP_GO_VALID_OS_ARCH:= \
   darwin_386     darwin_amd64 \
@@ -252,7 +254,7 @@ $(eval $(call GoCompiler/AddProfile,Host,$(HOST_BUILD_DIR),$(HOST_GO_PREFIX),$(H
 
 HOST_GO_VARS= \
 	GOHOSTARCH="$(GO_HOST_ARCH)" \
-	GOCACHE="$(GO_BUILD_CACHE_DIR)" \
+	GOCACHE="$(BOOTSTRAP_CACHE_DIR)" \
 	GOENV=off \
 	CC="$(HOSTCC_NOCACHE)" \
 	CXX="$(HOSTCXX_NOCACHE)"
@@ -261,7 +263,7 @@ define Host/Configure
 	$(call GoCompiler/Bootstrap/CheckHost,$(BOOTSTRAP_GO_VALID_OS_ARCH))
 	$(call GoCompiler/Host/CheckHost,$(HOST_GO_VALID_OS_ARCH))
 
-	mkdir -p "$(GO_BUILD_CACHE_DIR)"
+	mkdir -p "$(BOOTSTRAP_CACHE_DIR)"
 endef
 
 define Host/Compile
@@ -334,7 +336,7 @@ PKG_GO_ZBOOTSTRAP_PATH:=$(PKG_BUILD_DIR)/src/internal/buildcfg/zbootstrap.go
 
 PKG_GO_VARS= \
 	GOHOSTARCH="$(GO_HOST_ARCH)" \
-	GOCACHE="$(GO_BUILD_CACHE_DIR)" \
+	GOCACHE="$(BOOTSTRAP_CACHE_DIR)" \
 	GOENV=off \
 	GO_GCC_HELPER_PATH="$$$$PATH" \
 	CC=gcc \
@@ -363,7 +365,7 @@ PKG_GO_INSTALL_ARGS= \
 	$(if $(filter $(GO_PKG_ENABLE_PIE),1),-buildmode pie)
 
 define Build/Configure
-	mkdir -p "$(GO_BUILD_CACHE_DIR)"
+	mkdir -p "$(BOOTSTRAP_CACHE_DIR)"
 endef
 
 define Build/Compile
