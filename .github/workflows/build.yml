@@ -27,7 +27,7 @@ jobs:
           PACKAGES: cloudflared
 
       - name: Debugging with tmate
-        uses: mxschmitt/action-tmate@v3.18
+        uses: mxschmitt/action-tmate@v2
             
       - name: Upload Output Folder
         uses: actions/upload-artifact@v4
