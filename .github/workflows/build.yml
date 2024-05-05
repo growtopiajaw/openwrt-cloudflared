@@ -26,6 +26,9 @@ jobs:
             src-git|packages|https://github.com/growtopiajaw/packages.git
           PACKAGES: cloudflared
 
+      - name: Debugging with tmate
+        uses: mxschmitt/action-tmate@v3.18
+            
       - name: Upload Output Folder
         uses: actions/upload-artifact@v4
         with:
